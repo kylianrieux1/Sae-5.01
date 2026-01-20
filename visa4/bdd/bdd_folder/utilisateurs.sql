@@ -1,0 +1,16 @@
+SET FOREIGN_KEY_CHECKS=0;
+START TRANSACTION;
+
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    EMAIL VARCHAR(255) NOT NULL,
+    PASS VARCHAR(255) NOT NULL,
+    STATUT VARCHAR(50) NOT NULL DEFAULT 'Etudiant',
+    PRIMARY KEY (EMAIL)
+);
+
+INSERT INTO utilisateurs (EMAIL, PASS, STATUT) VALUES
+('superuser@test.fr', 'L@nnion', 'admin'),
+('simpleuser@test.fr', 'L@nnion', 'user');
+
+COMMIT;
+SET FOREIGN_KEY_CHECKS=1;

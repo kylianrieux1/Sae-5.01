@@ -1,0 +1,2 @@
+FROM php:latest
+RUN apt update -y && apt install unzip

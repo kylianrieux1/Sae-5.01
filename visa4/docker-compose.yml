@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+  db:
+    image: mariadb:11
+    container_name: db
+    restart: always
+    environment:
+      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_DATABASE=ma_bdd
+      - MARIADB_USER=api_user
+      - MARIADB_PASSWORD=api_password
+    ports:
+      - "3306:3306"
+    networks:
+      - network_
+    volumes:
+      - db_data:/var/lib/mysql
+      # Montage fichier par fichier pour forcer la visibilité
+      - ./bdd/bdd_folder/utilisateurs.sql:/docker-entrypoint-initdb.d/01_utilisateurs.sql
+      - ./bdd/bdd_folder/etudiants_grp.sql:/docker-entrypoint-initdb.d/02_etudiants.sql
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile_api
+    container_name: fastapi_api
+    restart: on-failure
+    depends_on:
+      - db
+    networks:
+      - network_
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=ma_bdd
+      - DB_USER=api_user
+      - DB_PASSWORD=api_password
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: web_site
+    restart: always
+    volumes:
+      - ./web/projet:/var/www/html
+    depends_on:
+      - api
+    networks:
+      - network_
+    ports:
+      - "8080:80"
+
+networks:
+  network_:
+    driver: bridge
+volumes:
+  db_data:
