@@ -1,0 +1,18 @@
+# Image officielle MariaDB
+FROM mariadb:11
+
+# Variables d’environnement
+ENV MARIADB_ROOT_PASSWORD=root
+ENV MARIADB_DATABASE=projet
+ENV MARIADB_USER=user
+ENV MARIADB_PASSWORD=userpass
+
+# Copie des scripts SQL dans le dossier d’initialisation
+# (Docker exécutera automatiquement tous les .sql lors du 1er démarrage)
+COPY bdd/*.sql /docker-entrypoint-initdb.d/
+
+# Expose le port par défaut
+EXPOSE 3306
+
+# Commande de démarrage par défaut
+CMD ["mysqld"]

@@ -1,0 +1,9 @@
+<?php
+include('fonctions.php');
+include('formulaires.php');
+if(!empty($_POST)){
+    $groupe=$_POST['grp'];
+    $eleve=listerEtudiantsParGroupe($groupe);
+    afficheTableau($eleve);
+}
+?>

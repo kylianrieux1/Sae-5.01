@@ -1,0 +1,7 @@
+FROM mariadb:latest
+ENV MARIADB_ROOT_PASSWORD=lannion
+ENV MARIADB_PASSWORD=lannion
+ENV mariadb_database=bdd
+ENV MARIADB_USER=user
+
+EXPOSE 3307

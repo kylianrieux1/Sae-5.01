@@ -1,0 +1,14 @@
+# Image officielle MariaDB
+FROM mariadb:11
+
+# Variables d’environnement (pas de secrets sensibles ici)
+ENV MARIADB_DATABASE=projet
+ENV MARIADB_USER=user
+ENV MARIADB_PASSWORD=userpass
+ENV MARIADB_ROOT_PASSWORD=root
+
+# Copie uniquement les fichiers SQL
+# Le chemin est relatif à l'endroit d'où tu lances le build
+COPY projet/bdd/*.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 3306
