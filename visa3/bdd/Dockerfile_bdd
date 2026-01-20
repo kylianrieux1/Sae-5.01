@@ -1,0 +1,13 @@
+# Image officielle MariaDB
+FROM mariadb:11
+
+# Variables d’environnement
+ENV MARIADB_DATABASE=ma_bdd
+ENV MARIADB_USER=api_user
+ENV MARIADB_PASSWORD=api_password
+ENV MARIADB_ROOT_PASSWORD=root
+
+# Copie uniquement les fichiers SQL
+COPY ./bdd_folder /docker-entrypoint-initdb.d/
+
+EXPOSE 3306

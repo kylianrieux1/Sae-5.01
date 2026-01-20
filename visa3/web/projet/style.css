@@ -1,0 +1,26 @@
+body{
+    margin-top:2%;
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom:2%;    
+}
+footer{
+    text-align: center;
+}
+header{
+    text-align: center;
+}
+#menu{
+    text-align: center;
+
+}
+
+#men{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#nav{
+    margin-left: 25px;
+}
